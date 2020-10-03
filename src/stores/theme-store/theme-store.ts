@@ -1,6 +1,6 @@
 import IThemeState from './itheme-state';
 import {createStore, Reducer, PreloadedState} from 'redux';
-import {darkTheme, lightTheme} from './themes';
+import {darkTheme, lightTheme} from './themes/themes';
 
 const themeStoreInitialState: PreloadedState<IThemeState> = {
   theme: lightTheme,

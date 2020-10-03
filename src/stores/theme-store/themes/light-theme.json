@@ -1,0 +1,9 @@
+{
+  "mode": "light",
+  "PRIMARY_BACKGROUND_COLOR": "#eaeaea",
+  "PRIMARY_TEXT_COLOR": "#212121",
+  "PRIMARY_BUTTON_COLOR": "#23a8d9",
+  "PRIMARY_BUTTON_TEXT_COLOR": "#ffffff",
+  "STATUS_BAR_STYLE": "default",
+  "CARD_BACKGROUND_COLOR": "#ffffff"
+}
