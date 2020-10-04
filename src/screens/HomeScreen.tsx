@@ -70,8 +70,6 @@ const HomeScreen = (props: any) => {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <StatusBar barStyle={theme.STATUS_BAR_STYLE}/>
       <Container>
         <Button
           onPress={() => {
@@ -94,7 +92,6 @@ const HomeScreen = (props: any) => {
                     </Card>
                   }/>
       </Container>
-    </ThemeProvider>
   );
 };
 
