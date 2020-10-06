@@ -1,3 +1,3 @@
 Done with first and second part.
 
-[Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+<img src="https://media.giphy.com/media/yVel09Ws8yKk2E4uN3/giphy.gif" width="362" height="800" />
