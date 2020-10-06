@@ -36,13 +36,15 @@ const PostScreen = (props: IProps) => {
                    const data = JSON.parse(event.nativeEvent.data);
                    if (data.message === 'pin') {
                      if (!props.pinned.includes(id)) {
-                       rootStore.dispatch({ type: 'PIN_POST', payload: id })
+                       rootStore.dispatch({ type: 'PIN_POST', payload: id });
+                       rootStore.dispatch({ type: 'SORT_POSTS' });
                        props.navigation.goBack();
                      }
                    }
                    if (data.message === 'unpin') {
                      if (props.pinned.includes(id)) {
-                       rootStore.dispatch({ type: 'UNPIN_POST', payload: id })
+                       rootStore.dispatch({ type: 'UNPIN_POST', payload: id });
+                       rootStore.dispatch({ type: 'SORT_POSTS' });
                        props.navigation.goBack();
                      }
                    }

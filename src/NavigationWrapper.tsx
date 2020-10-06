@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { StatusBar } from "react-native";
 import { ThemeProvider } from "styled-components/native";
 import PostScreen from "./screens/PostScreen";
-import { Text } from 'react-native';
 
 export default () => {
   const Stack = createStackNavigator();
@@ -17,7 +16,7 @@ export default () => {
       <ThemeProvider theme={theme}>
         <NavigationContainer theme={theme.mode === 'dark' ? DarkTheme : DefaultTheme}>
           <Stack.Navigator initialRouteName={'Home'}>
-            <Stack.Screen name="Home" component={HomeScreen}/>
+            <Stack.Screen options={{ headerShown: false }} name="Home" component={HomeScreen}/>
             <Stack.Screen name="Post" component={PostScreen}/>
           </Stack.Navigator>
         </NavigationContainer>

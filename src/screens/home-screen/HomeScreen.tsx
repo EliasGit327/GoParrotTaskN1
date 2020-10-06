@@ -12,6 +12,10 @@ const Text = styled.Text`
   color: ${(props: { theme: ITheme }) => props.theme.PRIMARY_TEXT_COLOR};
 `;
 
+const VerticalSpacer = styled.View`
+  margin-bottom: 10px;
+`;
+
 const Container = styled.SafeAreaView`
   background-color: ${(props: { theme: ITheme }) =>
   props.theme.PRIMARY_BACKGROUND_COLOR};
@@ -72,7 +76,6 @@ const WrapperForPin = styled.View`
   margin-right: 5px;
 `;
 
-
 interface IProps {
   navigation: any;
   changeTheme: () => {},
@@ -87,7 +90,7 @@ const HomeScreen = (props: IProps) => {
     jsonClient.getPosts().then((result) => {
       rootStore.dispatch({ type: 'SET_POSTS', payload: result.data });
     });
-  }, [props.navigation]);
+  }, []);
 
   return (
     <Container>
@@ -100,9 +103,13 @@ const HomeScreen = (props: IProps) => {
       <Button
         onPress={() => {
           rootStore.dispatch({ type: 'UNPIN_ALL_POSTS' });
+          jsonClient.getPosts().then((result) => {
+            rootStore.dispatch({ type: 'SET_POSTS', payload: result.data });
+          });
         }}>
         <ButtonText>Reset</ButtonText>
       </Button>
+      <VerticalSpacer/>
       <FlatList keyExtractor={(post, index) => `${post.title}-${index}`} data={props.posts}
                 renderItem={({ item }) =>
                   <Card onPress={() => {

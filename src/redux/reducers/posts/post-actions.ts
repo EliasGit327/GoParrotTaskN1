@@ -1,6 +1,11 @@
 import IPost from "../../../models/IPost";
 
-export type PostsAction = LoadPosts | PinPost | UnpinPost | UnpinAllPosts;
+export type PostsAction =
+  LoadPosts |
+  PinPost |
+  UnpinPost |
+  UnpinAllPosts |
+  SortPosts;
 
 interface LoadPosts {
   type: 'SET_POSTS',
@@ -22,3 +27,7 @@ interface UnpinAllPosts {
   payload?: null | undefined
 }
 
+interface SortPosts {
+  type: 'SORT_POSTS',
+  payload?: null | undefined
+}
