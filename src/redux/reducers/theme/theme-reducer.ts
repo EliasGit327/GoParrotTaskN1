@@ -1,12 +1,13 @@
 import IThemeState from './itheme-state';
-import {createStore, Reducer, PreloadedState} from 'redux';
+import {Reducer, PreloadedState} from 'redux';
 import {darkTheme, lightTheme} from './themes/themes';
+import { ThemeAction } from "./theme-actions";
 
 const themeStoreInitialState: PreloadedState<IThemeState> = {
   theme: lightTheme,
 };
 
-const themeReducer: Reducer<IThemeState, ThemeAction> =
+export const themeReducer: Reducer<IThemeState, ThemeAction> =
   (state: IThemeState | undefined, action: ThemeAction): IThemeState => {
   if (!state) {
     return themeStoreInitialState;
@@ -22,5 +23,3 @@ const themeReducer: Reducer<IThemeState, ThemeAction> =
       return state;
   }
 };
-
-export const ThemeStore = createStore(themeReducer, themeStoreInitialState);

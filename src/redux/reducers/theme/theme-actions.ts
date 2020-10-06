@@ -1,4 +1,4 @@
-type ThemeAction = SwitchTheme;
+export type ThemeAction = SwitchTheme;
 
 interface SwitchTheme {
   type: 'CHANGE_THEME',
