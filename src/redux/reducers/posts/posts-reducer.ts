@@ -1,5 +1,6 @@
 import IPostsState from "./iposts-state";
 import { PostsAction } from "./post-actions";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const initialState: IPostsState = {
   posts: [],
@@ -20,15 +21,21 @@ const postsReducer = (state: IPostsState = initialState, action: PostsAction) =>
       return { ...state, posts: [...pinnedPosts, ...copyOfState.posts] };
 
     case 'PIN_POST':
+      storePinned([...state.pinned, action.payload]).then();
       return { ...state, pinned: [...state.pinned, action.payload] };
+
+    case 'PIN_POSTS':
+      return { ...state, pinned: [...action.payload] };
 
     case "UNPIN_POST":
       const copy = { ...state }.pinned;
       const index = copy.indexOf(action.payload);
       copy.splice(index, 1);
+      storePinned([...copy]).then();
       return { ...state, pinned: [...copy] };
 
     case "UNPIN_ALL_POSTS":
+      storePinned([]).then();
       return { ...state, pinned: [] }
 
     case 'SET_POSTS':
@@ -40,3 +47,10 @@ const postsReducer = (state: IPostsState = initialState, action: PostsAction) =>
 }
 
 export default postsReducer;
+
+const storePinned = async (value: number[]) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem('pinned', jsonValue)
+  } catch (e) {}
+}

@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import styled from 'styled-components/native';
 import { ITheme } from '../../redux/reducers/theme/themes/themes';
 import { jsonClient } from "../../api/JsonPlaceholderAPI";
 import IPost from "../../models/IPost";
-import IPostsState from "../../redux/reducers/posts/iposts-state";
 import rootStore from "../../redux/root-store";
-
-const Text = styled.Text`
-  color: ${(props: { theme: ITheme }) => props.theme.PRIMARY_TEXT_COLOR};
-`;
+import AsyncStorage from '@react-native-community/async-storage';
 
 const VerticalSpacer = styled.View`
   margin-bottom: 10px;
@@ -87,8 +83,13 @@ interface IProps {
 const HomeScreen = (props: IProps) => {
 
   useEffect(() => {
+    getPinned().then((r: []) => {
+      rootStore.dispatch({ type: 'PIN_POSTS', payload: r });
+    });
+
     jsonClient.getPosts().then((result) => {
       rootStore.dispatch({ type: 'SET_POSTS', payload: result.data });
+      rootStore.dispatch({ type: 'SORT_POSTS'});
     });
   }, []);
 
@@ -142,3 +143,11 @@ const mapStateToProps = (store: any) => {
 }
 
 export default connect(mapStateToProps)(HomeScreen);
+
+const getPinned = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('pinned')
+    return jsonValue != null ? JSON.parse(jsonValue) : [];
+  } catch(e) {}
+}
+
