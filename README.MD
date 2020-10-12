@@ -1,4 +1,5 @@
 Done with first and second part.
+Update: Done with the third part.
 
 Needed API, host it pls on port:3000: https://github.com/EliasGit327/go-parrot-task-n1-api
 
